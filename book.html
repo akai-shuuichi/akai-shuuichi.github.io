@@ -38,7 +38,7 @@
       view.innerHTML = html;
     });
   }
-  $.post("http://"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
+  $.post("https://"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
     xuanran(result)
     localStorage.setItem("key",tp);
   });
