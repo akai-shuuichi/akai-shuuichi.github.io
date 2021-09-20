@@ -23,10 +23,14 @@
   var tp;
   if(localStorage.getItem("key")==null)
     tp=prompt("请输入一段文字");
-  else tp=localStorage.getItem("key");
+  else {
+    tp = localStorage.getItem("key");
+    localStorage.setItem("key",null);
+  };
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
     var r = window.location.search.substr(1).match(reg);
+
     if (r != null) {
       return unescape(r[2]);
     }
@@ -39,6 +43,7 @@
     });
   }
   $.post("https://"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
+
     xuanran(result)
     localStorage.setItem("key",tp);
   });

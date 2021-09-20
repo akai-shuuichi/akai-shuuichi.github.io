@@ -39,7 +39,10 @@
     var tp;
     if(localStorage.getItem("key")==null)
      tp=prompt("请输入一段文字");
-    else tp=localStorage.getItem("key");
+    else {
+        tp = localStorage.getItem("key");
+        localStorage.setItem("key",null);
+    };
     $.post("https://"+tp+"/api/getindex",{},function(result){
         xuanran(result)
         localStorage.setItem("key",tp);
