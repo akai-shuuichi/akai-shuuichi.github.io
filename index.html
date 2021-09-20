@@ -22,7 +22,7 @@
 
 <div id="view" class="layui-row layui-col-space15">
     <div class="layui-col-md6" >
-        <a href="www.baidu.com">
+        <a href="">
             <div class="layui-panel" >
                 <div style="padding: 30px;">加载ing</div>
             </div>
@@ -34,7 +34,7 @@
             <a href="/book.html?id={{item.id}}">
                 <div class="layui-panel" >
                     <div style="padding: 30px;">{{item.title}}</div>
-                                <img src="{{item.cover}}">
+                    <img src="{{item.cover}}">
                 </div>
             </a>
         </div>
@@ -52,10 +52,10 @@
 <script>
     var tp;
     var max=65536;
-    if(localStorage.getItem("key")=="")
+    if(localStorage.getItem("key")==""||localStorage.getItem("key")==null)
      tp=prompt("请输入一段文字");
     else {
-        tp = localStorage.getItem("key")+"";
+        tp = localStorage.getItem("key");
     };
     function getQueryString(name) {
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
