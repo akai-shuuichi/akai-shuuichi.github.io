@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
     <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
 <body>
+<div style="margin-left: auto;margin-right: auto ;height:60px">
+    关键字<input id="searchkey" type="text" name="searchkey" style="margin-top: 20px"/>
+    <button onclick="search()">提交</button>
+    <button onclick="nextpage(-1)">上一页</button>
+    <a id="notice">here</a>
+    <button onclick="nextpage(1)">下一页</button>
+</div>
+
+
 <div id="view" class="layui-row layui-col-space15">
     <div class="layui-col-md6" >
         <a href="www.baidu.com">
@@ -17,42 +26,75 @@
         </a>
     </div>
     <script id="demo" type="text/html">
-
         {{#  layui.each(d.data, function(index, item){ }}
         <div class="layui-col-md6" >
             <a href="/book.html?id={{item.id}}">
                 <div class="layui-panel" >
                     <div style="padding: 30px;">{{item.title}}</div>
-                                <img src="{{item.cover}}">
+<!--                                <img src="{{item.cover}}">-->
                 </div>
             </a>
         </div>
         {{#  }); }}
     </script>
-
 </div>
-
+<button onclick="search()">提交</button>
+<button onclick="nextpage(-1)">上一页</button>
+<a id="notice2">here</a>
+<button onclick="nextpage(1)">下一页</button>
 </body>
-
 </body>
 <script>
     var tp;
-    if(localStorage.getItem("key")==null)
+    var max=65536;
+    if(localStorage.getItem("key")=="")
      tp=prompt("请输入一段文字");
     else {
-        tp = localStorage.getItem("key");
-        localStorage.setItem("key",null);
+        tp = localStorage.getItem("key")+"";
+        localStorage.setItem("key","");
     };
-    $.post("https://"+tp+"/api/getindex",{},function(result){
+    function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return decodeURI(r[2]);
+        }
+        return null;
+    }
+    $.post("//"+tp+"/api/getindex",{searchkey:(getQueryString("searchkey")),page:getQueryString("page")},function(result){
         xuanran(result)
+        max=result.len;
+        document.getElementById("notice").innerText=getQueryString("page")+"/"+max;
+        document.getElementById("notice2").innerText=getQueryString("page")+"/"+max;
         localStorage.setItem("key",tp);
-        console.log("成功！")
+
     });
     function xuanran(data){
-        var getTpl = demo.innerHTML,view = document.getElementById('view');
+        var getTpl = document.getElementById("demo").innerHTML,view = document.getElementById('view');
         layui.laytpl(getTpl).render(data, function(html){
             view.innerHTML = html;
         });
+        layui.use('flow', function(){
+            var flow = layui.flow;
+            //当你执行这样一个方法时，即对页面中的全部带有 lay-src 的 img 元素开启了懒加载（当然你也可以指定相关 img）
+            flow.lazyimg();
+        });
     }
+    function search(){
+        top.location="index.html?searchkey="+document.getElementById("searchkey").value;
+    }
+    function nextpage(offset){
+       var next;
+       if(getQueryString("page")==null){
+           next=1+offset;
+       }else {
+           next=Number(getQueryString("page"))+offset;
+       }
+       if(next<1||next>max){
+           layer.msg("没有更多辣");
+       }else
+        top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page="+next;
+    }
+
 </script>
 </html>

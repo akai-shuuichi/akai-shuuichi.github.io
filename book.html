@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
   <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
@@ -9,9 +9,7 @@
 <body>
 <div id="view" class="layui-card" align="center" width="50%" style="margin-inside: 50px;width: 500px ;margin-left:auto;margin-right:auto;margin-top:50px" >
   加载ing
-
   <script id="demo" type="text/html">
-
     {{#  layui.each(d.data, function(index, item){ }}
     <div onclick=do1({{index+1}}) class="layui-card-header" style="font-size: 50px;margin-top:auto;margin-bottom:auto;"><a>{{item.title}}</a></div>
     {{#  }); }}
@@ -21,18 +19,18 @@
 </body>
 <script>
   var tp;
-  if(localStorage.getItem("key")==null)
+  if(localStorage.getItem("key")=="")
     tp=prompt("请输入一段文字");
   else {
-    tp = localStorage.getItem("key");
-    localStorage.setItem("key",null);
+    tp = localStorage.getItem("key")+"";
+    localStorage.setItem("key","");
   };
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
     var r = window.location.search.substr(1).match(reg);
 
     if (r != null) {
-      return unescape(r[2]);
+      return decodeURI(r[2]);
     }
     return null;
   }
@@ -41,9 +39,13 @@
     layui.laytpl(getTpl).render(data, function(html){
       view.innerHTML = html;
     });
+    layui.use('flow', function(){
+      var flow = layui.flow;
+      //当你执行这样一个方法时，即对页面中的全部带有 lay-src 的 img 元素开启了懒加载（当然你也可以指定相关 img）
+      flow.lazyimg();
+    });
   }
-  $.post("https://"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
-
+  $.post("//"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
     xuanran(result)
     localStorage.setItem("key",tp);
   });
