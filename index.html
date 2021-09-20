@@ -40,7 +40,7 @@
     if(localStorage.getItem("key")==null)
      tp=prompt("请输入一段文字");
     else tp=localStorage.getItem("key");
-    $.post("http://"+tp+"/api/getindex",{},function(result){
+    $.post("https://"+tp+"/api/getindex",{},function(result){
         xuanran(result)
         localStorage.setItem("key",tp);
         console.log("成功！")

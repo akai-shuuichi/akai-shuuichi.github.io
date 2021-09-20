@@ -42,7 +42,7 @@
         flow.lazyimg();
     });
 
-    $.post("http://"+tp+"/api/getpic",{bookid:getQueryString("bookid"),eps:getQueryString("eps")},function(result){
+    $.post("https://"+tp+"/api/getpic",{bookid:getQueryString("bookid"),eps:getQueryString("eps")},function(result){
         xuanran(result)
         localStorage.setItem("key",tp);
     });
