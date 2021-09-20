@@ -8,14 +8,17 @@
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
 </head>
 <body>
-<div style="margin-left: auto;margin-right: auto ;height:60px">
-    关键字<input id="searchkey" type="text" name="searchkey" style="margin-top: 20px"/>
-    <button onclick="search()">提交</button>
-    <button onclick="nextpage(-1)">上一页</button>
-    <a id="notice">here</a>
-    <button onclick="nextpage(1)">下一页</button>
+<div style="margin-left: auto;margin-right: auto ;height:100px">
+    <div style="display: flex;white-space:nowrap; text-align: center" >
+        <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input" />
+        <button onclick="search()" class="layui-btn">提交</button>
+    </div>
+   <div style="text-align: center">
+       <button onclick="nextpage(-1)" class="layui-btn" >上一页</button>
+       <a id="notice">加载中。。。。。</a>
+       <button onclick="nextpage(1)" class="layui-btn">下一页</button>
+   </div>
 </div>
-
 
 <div id="view" class="layui-row layui-col-space15">
     <div class="layui-col-md6" >
@@ -31,18 +34,20 @@
             <a href="/book.html?id={{item.id}}">
                 <div class="layui-panel" >
                     <div style="padding: 30px;">{{item.title}}</div>
-                                <img src="{{item.cover}}">
+<!--                                <img src="{{item.cover}}">-->
                 </div>
             </a>
         </div>
         {{#  }); }}
     </script>
 </div>
-<button onclick="search()">提交</button>
-<button onclick="nextpage(-1)">上一页</button>
-<a id="notice2">here</a>
-<button onclick="nextpage(1)">下一页</button>
-</body>
+
+<div style="text-align: center">
+    <button onclick="nextpage(-1)" class="layui-btn" >上一页</button>
+    <a id="notice2">加载中。。。。。</a>
+    <button onclick="nextpage(1)" class="layui-btn">下一页</button>
+</div>
+
 </body>
 <script>
     var tp;
@@ -63,8 +68,10 @@
     $.post("//"+tp+"/api/getindex",{searchkey:(getQueryString("searchkey")),page:getQueryString("page")},function(result){
         xuanran(result)
         max=result.len;
-        document.getElementById("notice").innerText=getQueryString("page")+"/"+max;
-        document.getElementById("notice2").innerText=getQueryString("page")+"/"+max;
+        var dqpage=1;
+        if(getQueryString("page")!=null)dqpage=getQueryString("page")
+        document.getElementById("notice").innerText=dqpage+"/"+max;
+        document.getElementById("notice2").innerText=dqpage+"/"+max;
         localStorage.setItem("key",tp);
 
     });
@@ -94,6 +101,8 @@
        }else
         top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page="+next;
     }
+
+
 
 </script>
 </html>
