@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+  <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+<div id="view" class="layui-card" align="center" width="50%" style="margin-inside: 50px;width: 500px ;margin-left:auto;margin-right:auto;margin-top:50px" >
+  加载ing
+
+  <script id="demo" type="text/html">
+
+    {{#  layui.each(d.data, function(index, item){ }}
+    <div onclick=do1({{index+1}}) class="layui-card-header" style="font-size: 50px;margin-top:auto;margin-bottom:auto;"><a>{{item.title}}</a></div>
+    {{#  }); }}
+  </script>
+</div>
+
+</body>
+<script>
+  var tp;
+  if(localStorage.getItem("key")==null)
+    tp=prompt("请输入一段文字");
+  else tp=localStorage.getItem("key");
+  function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
+  }
+  function xuanran(data){
+    var getTpl = demo.innerHTML,view = document.getElementById('view');
+    layui.laytpl(getTpl).render(data, function(html){
+      view.innerHTML = html;
+    });
+  }
+  $.post("http://"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
+    xuanran(result)
+    localStorage.setItem("key",tp);
+  });
+  function do1(index){
+    top.location="detail.html?bookid="+getQueryString("id")+"&eps="+index;
+  }
+</script>
+</html>

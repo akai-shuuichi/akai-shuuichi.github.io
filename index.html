@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+<div id="view" class="layui-row layui-col-space15">
+    <div class="layui-col-md6" >
+        <a href="www.baidu.com">
+            <div class="layui-panel" >
+                <div style="padding: 30px;">加载ing</div>
+            </div>
+        </a>
+    </div>
+    <script id="demo" type="text/html">
+
+        {{#  layui.each(d.data, function(index, item){ }}
+        <div class="layui-col-md6" >
+            <a href="/demo/book.html?id={{item.id}}">
+                <div class="layui-panel" >
+                    <div style="padding: 30px;">{{item.title}}</div>
+                    <!--            <img src="{{item.cover}}">-->
+                </div>
+            </a>
+        </div>
+        {{#  }); }}
+    </script>
+
+</div>
+
+</body>
+
+</body>
+<script>
+    var tp;
+    if(localStorage.getItem("key")==null)
+     tp=prompt("请输入一段文字");
+    else tp=localStorage.getItem("key");
+    $.post("http://"+tp+"/api/getindex",{},function(result){
+        xuanran(result)
+        localStorage.setItem("key",tp);
+    });
+    function xuanran(data){
+        var getTpl = demo.innerHTML,view = document.getElementById('view');
+        layui.laytpl(getTpl).render(data, function(html){
+            view.innerHTML = html;
+        });
+    }
+</script>
+</html>
