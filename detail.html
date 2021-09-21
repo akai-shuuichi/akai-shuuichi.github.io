@@ -12,7 +12,7 @@
     加载中
     <script id="demo" type="text/html">
         {{#layui.each(d.data, function(index, item){ }}
-        <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy">第{{index+1}}页
+        <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy" style="width:100%;height:auto">第{{index+1}}页
         {{#}); }}
     </script>
 </div>
@@ -23,7 +23,6 @@
         tp=prompt("请输入一段文字");
     else {
         tp = localStorage.getItem("key")+"";
-
     };
     function getQueryString(name) {
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
