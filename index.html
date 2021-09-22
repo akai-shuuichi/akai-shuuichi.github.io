@@ -103,7 +103,7 @@
        if(next<1||next>max){
            layer.msg("没有更多辣");
        }else
-        top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page="+next;
+        top.location="index.html?searchkey="+getQueryString("searchkey")+"&page="+next;
     }
 
 
