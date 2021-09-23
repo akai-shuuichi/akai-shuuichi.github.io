@@ -201,7 +201,7 @@
         });
     }
     function search(){
-        $.post("//"+tp+"/api/getindex",{searchkey:(document.getElementById("searchkey").value),page:getQueryString("page")},function(result){
+        $.post("//"+tp+"/api/getindex",{searchkey:(document.getElementById("searchkey").value),page:1},function(result){
             xuanran(result)
             max=result.len;
             var dqpage=1;
