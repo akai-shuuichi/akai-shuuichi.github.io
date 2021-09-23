@@ -13,6 +13,7 @@
 <div id="view" class="layui-row layui-col-space15">
     加载中
 </div>
+
 <script id="demo" type="text/html">
     {{#layui.each(d.data, function(index, item){ }}
     <img src="pic/loading.gif" lay-src="{{item.pic}}" loading="lazy" onload="this.src=this.getAttribute('lay-src')" style="width:100%;height:auto">

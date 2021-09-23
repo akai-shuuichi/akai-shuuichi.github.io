@@ -7,8 +7,39 @@
   <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <script src="js/utils.js"></script>
+  <style>
+    .tgul{
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+      text-align: justify;
+      margin: 0;
+      padding: 0;
+    }
+    .tg{
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      line-height: 1.6;
+      list-style: none;
+      background-color: #df4338;
+      border-radius: 12px;
+      margin: 6px;
+      border: 2px solid #df4338;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-family: Arial;
+      font-size: 17px;
+      padding: 1px 6px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #df4338;
+    }
+  </style>
 </head>
 <body>
+<ul id="tags" class="tgul">
+ 标签加载中
+</ul>
 <div id="view"   >
   加载ing
 
@@ -17,6 +48,11 @@
 <script id="demo" type="text/html">
   {{#  layui.each(d.data, function(index, item){ }}
   <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 21%">{{item.title}}</button>
+  {{#  }); }}
+</script>
+<script id="demo1" type="text/html">
+  {{#  layui.each(d.cate, function(index, item){ }}
+  <li class="tg"><a href="tag.html?cate={{item}}" rel="tag">{{item}}</a>
   {{#  }); }}
 </script>
 
@@ -39,7 +75,10 @@
     layui.laytpl(getTpl).render(data, function(html){
       view.innerHTML = html;
     });
-
+    var getTpl2 = demo1.innerHTML,view2 = document.getElementById('tags');
+    layui.laytpl(getTpl2).render(data, function(html){
+      view2.innerHTML = html;
+    });
   }
   function do1(index){
     top.location="detail.html?bookid="+getQueryString("id")+"&eps="+index;

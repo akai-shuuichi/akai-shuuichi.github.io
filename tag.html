@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Title</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+  <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+  <script src="js/utils.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <style>
+    .list {
+      width: 100%;
+      margin-bottom: 5px;
+      padding: 0px;
+    }
+    .cl {
+      zoom: 1;
+    }
+    ul {
+      display:table-row  ;
+      list-style-type: disc;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 30px;
+    }
+    .list li {
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      color: #ccc;
+      margin: 0;
+      list-style: none;
+      list-style-type: none;
+      width: 25%;
+      float: left;
+      padding: 10px 0 0 10px;
+      -webkit-box-sizing: border-box;
+    }
+    .list li img {
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      list-style: none;
+      list-style-type: none;
+      color: #ccc;
+      aspect-ratio: auto 205 / 277;
+      border: 0;
+      width: 100%;
+      height: auto;
+      vertical-align: top;
+      display:table-row  ;
+      border-radius: 8px;
+
+    }
+    ul ul {
+      list-style-type: circle;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+    }
+
+    div {
+      display: block;
+    }
+
+    .txtbts{
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      list-style: none;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+      width: 80%;
+      height: 37px;
+      line-height: 12px;
+      font-size: 12px;
+      color: #333;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: clip;
+      background: #fff;
+      text-align: center;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      color: #ccc;
+      height: 100%!important;
+    }
+    .ft{
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      color: #ccc;
+      margin: 0;
+      padding: 0;
+      zoom: 1;
+      width: 100%;
+      position: relative;
+      margin-top: 10px;
+      margin-left: 1%;
+    }
+    .bd{
+      font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+      color: #ccc;
+      margin: 0;
+      position: relative;
+      padding: 0 6px;
+      margin-left: -1px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="body pos bd">
+  标签模式下无法搜索
+<!--  <div style="height:50px">-->
+<!--    <div style="display: flex;white-space:nowrap; " >-->
+<!--      <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input text-align: center;" />-->
+<!--      <button id="search" onclick="search()" class="layui-btn">搜索</button>-->
+<!--    </div>-->
+  </div>
+  <ul id="view" class="cl list">
+    <li>
+      <a href=""><img src="" alt="" width="205" height="277">
+        <div class="txtbts"></div>
+      </a>
+    </li>
+  </ul>
+  <div style="text-align: center ;display:inline-block;">
+    <button onclick="skip(0)" class="layui-btn" style="width: 75px ;display:inline-block;">第一页</button>
+    <button onclick="nextpage(-1)" class="layui-btn"style="width: 75px;display:inline-block;" >上一页</button>
+    <a id="notice2">加载中。。。。。</a>
+    <button onclick="nextpage(1)" class="layui-btn" style="width: 75px;display:inline-block;">下一页</button>
+    <button onclick="skip(1)" class="layui-btn" style="width: 75px;display:inline-block;">最末页</button>
+  </div>
+</div>
+
+<script id="demo" type="text/html">
+  {{#  layui.each(d.data, function(index, item){ }}
+  <li>
+    <a href="book.html?id={{item.id}}">
+      <img src="{{item.cover}}" width="205" height="277">
+      <div class="txtbts">{{item.title}}</div>
+    </a>
+  </li>
+  {{#  }); }}
+</script>
+
+
+
+</body>
+<script>
+  var dqpage=1;
+  var tp;
+  var max=65536;
+  if(localStorage.getItem("key")===""||localStorage.getItem("key")==null) {
+    if(getQueryString("invcode")===null)
+      tp = prompt("请输入一段文字");
+    else
+      tp=getQueryString("invcode");
+  }
+  else {
+    tp = localStorage.getItem("key");
+  }
+
+  jiazai(getQueryString("cate"),1)
+  function xuanran(data){
+    var getTpl = document.getElementById("demo").innerHTML,view = document.getElementById('view');
+    layui.laytpl(getTpl).render(data, function(html){
+      view.innerHTML = html;
+    });
+    layui.use('flow', function(){
+      var flow = layui.flow;
+      flow.lazyimg();
+    });
+  }
+
+  function nextpage(offset){
+    var next=dqpage+offset;
+    jiazai(getQueryString("cate"),next);
+  }
+  function jiazai(key,page){
+    if(page<1||page>max){
+      layer.msg("没有更多辣");
+      return ;
+    }
+    let loa= layer.load();
+    $.post("//"+tp+"/api/getcate",{cate:key,page:page},function(result){
+      layer.close(loa);
+      xuanran(result)
+      max=result.len;
+      dqpage=page;
+      if(getQueryString("page")!=null)dqpage=getQueryString("page")
+      document.getElementById("notice2").innerText=dqpage+"/"+max;
+      localStorage.setItem("key",tp);
+    });
+  }
+  function skip(offset){
+    if(offset===0)jiazai(getQueryString("cate"),1)
+    else jiazai(getQueryString("cate"),max)
+  }
+</script>
+</html>
