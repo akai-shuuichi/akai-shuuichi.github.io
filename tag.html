@@ -162,7 +162,7 @@
     tp = localStorage.getItem("key");
   }
 
-  jiazai(getQueryString("cate"),1)
+  jiazai(getQueryString("tag"),1)
   function xuanran(data){
     var getTpl = document.getElementById("demo").innerHTML,view = document.getElementById('view');
     layui.laytpl(getTpl).render(data, function(html){
@@ -176,7 +176,7 @@
 
   function nextpage(offset){
     var next=dqpage+offset;
-    jiazai(getQueryString("cate"),next);
+    jiazai(getQueryString("tag"),next);
   }
   function jiazai(key,page){
     if(page<1||page>max){
@@ -184,7 +184,7 @@
       return ;
     }
     let loa= layer.load();
-    $.post("//"+tp+"/api/getcate",{cate:key,page:page},function(result){
+    $.post("//"+tp+"/api/gettag",{tag:key,page:page},function(result){
       layer.close(loa);
       xuanran(result)
       max=result.len;
@@ -195,8 +195,8 @@
     });
   }
   function skip(offset){
-    if(offset===0)jiazai(getQueryString("cate"),1)
-    else jiazai(getQueryString("cate"),max)
+    if(offset===0)jiazai(getQueryString("tag"),1)
+    else jiazai(getQueryString("tag"),max)
   }
 </script>
 </html>
