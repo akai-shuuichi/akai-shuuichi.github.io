@@ -12,12 +12,13 @@
 <div id="view" class="layui-card" align="center" width="50%" style="margin-inside: 50px;width: 500px ;margin-left:auto;margin-right:auto;margin-top:50px" >
   加载ing
 
-  <script id="demo" type="text/html">
-    {{#  layui.each(d.data, function(index, item){ }}
-    <div onclick=do1({{index+1}}) class="layui-card-header" style="font-size: 50px;margin-top:auto;margin-bottom:auto;"><a>{{item.title}}</a></div>
-    {{#  }); }}
-  </script>
+
 </div>
+<script id="demo" type="text/html">
+  {{#  layui.each(d.data, function(index, item){ }}
+  <div onclick=do1({{index+1}}) class="layui-card-header" style="font-size: 50px;margin-top:auto;margin-bottom:auto;"><a>{{item.title}}</a></div>
+  {{#  }); }}
+</script>
 
 </body>
 <script>
@@ -34,7 +35,7 @@
     localStorage.setItem("key",tp);
   });
   function xuanran(data){
-    var getTpl = demo.innerHTML,view = document.getElementById('demo');
+    var getTpl = demo.innerHTML,view = document.getElementById('view');
     layui.laytpl(getTpl).render(data, function(html){
       view.innerHTML = html;
     });
