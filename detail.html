@@ -16,7 +16,7 @@
 </div>
 <script id="demo" type="text/html">
     {{#layui.each(d.data, function(index, item){ }}
-    <img src="/pic/loading.gif" lay-src="{{item.pic}}" loading="lazy" onload="this.src=this.getAttribute('lay-src')" style="width:100%;height:auto">第{{index+1}}页
+    <img src="pic/loading.gif" lay-src="{{item.pic}}" loading="lazy" onload="this.src=this.getAttribute('lay-src')" style="width:100%;height:auto">第{{index+1}}页
     {{#}); }}
 </script>
 </body>
