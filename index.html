@@ -119,8 +119,11 @@
 <div class="body pos bd">
     <div style="margin-left: auto;margin-right: auto ;height:50px">
         <div style="display: flex;white-space:nowrap; text-align: center" >
+            <form onsubmit="search()">
             <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input" />
+            </form>
             <button onclick="search()" class="layui-btn">提交</button>
+
         </div>
     </div>
         <ul id="view" class="cl list">
