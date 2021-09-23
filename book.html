@@ -33,6 +33,13 @@
     xuanran(result)
     localStorage.setItem("key",tp);
   });
+  function xuanran(data){
+    var getTpl = demo.innerHTML,view = document.getElementById('demo');
+    layui.laytpl(getTpl).render(data, function(html){
+      view.innerHTML = html;
+    });
+
+  }
   function do1(index){
     top.location="detail.html?bookid="+getQueryString("id")+"&eps="+index;
   }
