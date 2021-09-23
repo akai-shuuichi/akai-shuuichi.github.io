@@ -27,14 +27,7 @@
     else {
         tp = localStorage.getItem("key")+"";
     };
-    function getQueryString(name) {
-        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return decodeURI(r[2]);
-        }
-        return null;
-    }
+
     function xuanran(data){
         var getTpl = demo.innerHTML,view = document.getElementById('view');
         layui.laytpl(getTpl).render(data, function(html){

@@ -57,16 +57,10 @@
             margin-block-end: 0px;
         }
 
-        .pos {
-            position: relative;
-        }
         div {
             display: block;
         }
-        .body {
-            padding: 0 6px;
-            margin-left: -1px;
-        }
+
         .txtbts{
             font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
             list-style: none;
@@ -118,13 +112,10 @@
 
 
 <div class="body pos bd">
-    <div style="margin-left: auto;margin-right: auto ;height:50px">
-        <div style="display: flex;white-space:nowrap; text-align: center" >
-            <form onsubmit="search()">
-            <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input" />
-            </form>
-            <button onclick="search()" class="layui-btn">提交</button>
-
+    <div style="height:50px">
+        <div style="display: flex;white-space:nowrap; " >
+            <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input text-align: center;" />
+            <button id="search" onclick="search()" class="layui-btn">搜索</button>
         </div>
     </div>
         <ul id="view" class="cl list">
@@ -168,7 +159,12 @@
     else {
         tp = localStorage.getItem("key");
     };
-
+    document.onkeydown = function (event) {
+        var e = event || window.event;
+        if (e && e.keyCode === 13) { //回车键的键值为13
+           document.getElementById("search").click(); //调用登录按钮的登录事件
+        }
+    };
 
     $.post("//"+tp+"/api/getindex",{searchkey:(getQueryString("searchkey")),page:getQueryString("page")},function(result){
         xuanran(result)
@@ -195,12 +191,13 @@
         });
     }
     function search(){
+       let loa= layer.load();
         $.post("//"+tp+"/api/getindex",{searchkey:(document.getElementById("searchkey").value),page:1},function(result){
+            layer.close(loa);
             xuanran(result)
             max=result.len;
             var dqpage=1;
             if(getQueryString("page")!=null)dqpage=getQueryString("page")
-            document.getElementById("notice").innerText=dqpage+"/"+max;
             document.getElementById("notice2").innerText=dqpage+"/"+max;
             localStorage.setItem("key",tp);
         });
