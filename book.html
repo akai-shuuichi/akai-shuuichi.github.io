@@ -6,6 +6,7 @@
   <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
   <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <script src="js/utils.js"></script>
 </head>
 <body>
 <div id="view" class="layui-card" align="center" width="50%" style="margin-inside: 50px;width: 500px ;margin-left:auto;margin-right:auto;margin-top:50px" >
@@ -27,26 +28,7 @@
     tp = localStorage.getItem("key")+"";
 
   };
-  function getQueryString(name) {
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-    var r = window.location.search.substr(1).match(reg);
 
-    if (r != null) {
-      return decodeURI(r[2]);
-    }
-    return null;
-  }
-  function xuanran(data){
-    var getTpl = demo.innerHTML,view = document.getElementById('view');
-    layui.laytpl(getTpl).render(data, function(html){
-      view.innerHTML = html;
-    });
-    layui.use('flow', function(){
-      var flow = layui.flow;
-      //当你执行这样一个方法时，即对页面中的全部带有 lay-src 的 img 元素开启了懒加载（当然你也可以指定相关 img）
-      flow.lazyimg();
-    });
-  }
   $.post("//"+tp+"/api/geteps",{bookid:getQueryString("id")},function(result){
     xuanran(result)
     localStorage.setItem("key",tp);

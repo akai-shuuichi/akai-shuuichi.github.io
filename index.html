@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
     <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script src="js/utils.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
         .list {
@@ -168,14 +169,7 @@
         tp = localStorage.getItem("key");
     };
 
-    function getQueryString(name) {
-        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return decodeURI(r[2]);
-        }
-        return null;
-    }
+
     $.post("//"+tp+"/api/getindex",{searchkey:(getQueryString("searchkey")),page:getQueryString("page")},function(result){
         xuanran(result)
         max=result.len;
@@ -209,7 +203,6 @@
             document.getElementById("notice").innerText=dqpage+"/"+max;
             document.getElementById("notice2").innerText=dqpage+"/"+max;
             localStorage.setItem("key",tp);
-
         });
     }
     function nextpage(offset){
@@ -222,11 +215,7 @@
        if(next<1||next>max){
            layer.msg("没有更多辣");
        }else
-
         top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page="+next;
     }
-
-
-
 </script>
 </html>
