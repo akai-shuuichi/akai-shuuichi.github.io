@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
     <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 <body>
 <div id="view" class="layui-row layui-col-space15">
     加载中
     <script id="demo" type="text/html">
         {{#layui.each(d.data, function(index, item){ }}
-        <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy" style="width:50%;height:auto">第{{index+1}}页
+        <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy" style="width:90%;height:auto">第{{index+1}}页
         {{#}); }}
     </script>
 </div>
