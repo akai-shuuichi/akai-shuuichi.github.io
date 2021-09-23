@@ -12,12 +12,13 @@
 <body>
 <div id="view" class="layui-row layui-col-space15">
     加载中
-    <script id="demo" type="text/html">
-        {{#layui.each(d.data, function(index, item){ }}
-        <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy" style="width:90%;height:auto">第{{index+1}}页
-        {{#}); }}
-    </script>
+
 </div>
+<script id="demo" type="text/html">
+    {{#layui.each(d.data, function(index, item){ }}
+    <img src="{{item.pic}}" lay-src="{{item.pic}} " loading="lazy" style="width:90%;height:auto">第{{index+1}}页
+    {{#}); }}
+</script>
 </body>
 <script>
     var tp;
