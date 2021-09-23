@@ -124,12 +124,12 @@
                     <div class="txtbts"></div></a>
             </li>
         </ul>
-    <div  style="text-align: center">
-        <button onclick="skip(0)" class="layui-btn">第一页</button>
-        <button onclick="nextpage(-1)" class="layui-btn" >上一页</button>
+    <div style="text-align: center">
+        <button onclick="skip(0)" class="layui-btn" style="width: 80px">第一页</button>
+        <button onclick="nextpage(-1)" class="layui-btn"style="width: 80px" >上一页</button>
         <a id="notice2">加载中。。。。。</a>
-        <button onclick="nextpage(1)" class="layui-btn">下一页</button>
-        <button onclick="skip(1)" class="layui-btn">最后一页</button>
+        <button onclick="nextpage(1)" class="layui-btn" style="width: 80px">下一页</button>
+        <button onclick="skip(1)" class="layui-btn" style="width: 80px">最末页</button>
     </div>
 </div>
 
@@ -185,19 +185,17 @@
         });
     }
     function search(){
-       let loa= layer.load();
         jiazai(document.getElementById("searchkey").value,1)
     }
     function nextpage(offset){
-      var next=dqpage+offset;
-       if(next<1||next>max){
-           layer.msg("没有更多辣");
-       }else
-       {
-           jiazai(document.getElementById("searchkey").value,next);
-       }
+        var next=dqpage+offset;
+        jiazai(document.getElementById("searchkey").value,next);
     }
     function jiazai(key,page){
+        if(page<1||page>max){
+            layer.msg("没有更多辣");
+            return ;
+        }
         let loa= layer.load();
         $.post("//"+tp+"/api/getindex",{searchkey:key,page:page},function(result){
             layer.close(loa);
