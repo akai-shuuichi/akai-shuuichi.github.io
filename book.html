@@ -9,14 +9,14 @@
   <script src="js/utils.js"></script>
 </head>
 <body>
-<div id="view" class="layui-card" align="center" width="50%" style="margin-inside: 50px;width: 500px ;margin-left:auto;margin-right:auto;margin-top:50px" >
+<div id="view"   >
   加载ing
 
 
 </div>
 <script id="demo" type="text/html">
   {{#  layui.each(d.data, function(index, item){ }}
-  <div onclick=do1({{index+1}}) class="layui-card-header" style="font-size: 50px;margin-top:auto;margin-bottom:auto;"><a>{{item.title}}</a></div>
+  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 21%">{{item.title}}</button>
   {{#  }); }}
 </script>
 
