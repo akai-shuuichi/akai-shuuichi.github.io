@@ -40,14 +40,13 @@
 <ul id="tags" class="tgul">
  标签加载中
 </ul>
-<div id="view"   >
+<div id="view"  style="display: inline;text-align: center;margin-left: 10" >
   加载ing
-
-
 </div>
+
 <script id="demo" type="text/html">
   {{#  layui.each(d.data, function(index, item){ }}
-  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 21%">{{item.title}}</button>
+  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 24.71%;margin-left: auto;margin-right: auto">{{item.title}}</button>
   {{#  }); }}
 </script>
 <script id="demo1" type="text/html">
