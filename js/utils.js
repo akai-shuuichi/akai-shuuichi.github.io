@@ -7,3 +7,7 @@ function getQueryString(name) {
     }
     return null;
 }
+function goBack()
+{
+    window.history.go(-1);
+}

@@ -36,7 +36,13 @@
     }
   </style>
 </head>
+
 <body>
+<div class="layui-row" style="height: 50px ;background: #df4338">
+  <div class="layui-col-md1">
+    <button onclick="goBack()" class="layui-col-md1 layui-icon layui-icon-left" style="color: white; border-right:2px solid #ffffff;; height:50px ;background: #df4338;font-size:xxx-large"></button>
+  </div>
+</div>
 <ul id="tags" class="tgul">
  标签加载中
 </ul>
@@ -46,7 +52,7 @@
 
 <script id="demo" type="text/html">
   {{#  layui.each(d.data, function(index, item){ }}
-  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 24%;margin-left: auto;margin-right: auto">{{item.title}}</button>
+  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 24%;margin-left: auto;margin-right: auto ">{{item.title}}</button>
   {{#  }); }}
 </script>
 <script id="demo1" type="text/html">
