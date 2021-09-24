@@ -111,12 +111,12 @@
 <body>
 
 <div class="body pos bd">
-  标签模式下无法搜索
-<!--  <div style="height:50px">-->
-<!--    <div style="display: flex;white-space:nowrap; " >-->
-<!--      <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input text-align: center;" />-->
-<!--      <button id="search" onclick="search()" class="layui-btn">搜索</button>-->
-<!--    </div>-->
+
+  <div style="height:50px">
+    <div style="display: flex;white-space:nowrap; " >
+      <input id="searchkey" type="text" placeholder="输入关键字" name="searchkey" class="layui-input text-align: center;" />
+      <button id="search" onclick="search()" class="layui-btn">搜索</button>
+    </div>
   </div>
   <ul id="view" class="cl list">
     <li>
@@ -198,6 +198,9 @@
   function skip(offset){
     if(offset===0)jiazai(getQueryString("tag"),1)
     else jiazai(getQueryString("tag"),max)
+  }
+  function search(){
+    top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page=1"
   }
 </script>
 </html>

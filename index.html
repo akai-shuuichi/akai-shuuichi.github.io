@@ -167,7 +167,7 @@
         }
     };
 
-    jiazai(document.getElementById("searchkey").value,1)
+    jiazai(getQueryString("searchkey"),1)
     if(getQueryString("searchkey")!=null){
         document.getElementById("searchkey").value=getQueryString("searchkey");
     }
@@ -186,7 +186,7 @@
         jiazai(document.getElementById("searchkey").value,1)
     }
     function nextpage(offset){
-        var next=dqpage+offset;
+        var next=Number(dqpage)+offset;
         jiazai(document.getElementById("searchkey").value,next);
     }
     function jiazai(key,page){
