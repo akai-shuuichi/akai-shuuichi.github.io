@@ -193,8 +193,7 @@
         if(page<1||page>max){
             layer.msg("没有更多辣");
             return ;
-        }
-        let loa= layer.load();
+        } loa= layer.load();
         $.post("//"+tp+"/api/getindex",{searchkey:key,page:page},function(result){
             layer.close(loa);
             xuanran(result)
@@ -206,6 +205,7 @@
         });
     }
     function skip(offset){
+
        if(offset===0)jiazai(document.getElementById("searchkey").value,1)
         else jiazai(document.getElementById("searchkey").value,max)
     }
