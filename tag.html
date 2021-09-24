@@ -175,11 +175,12 @@
   }
 
   function nextpage(offset){
-    var next=dqpage+offset;
+    var next=Number(dqpage)+offset;
     jiazai(getQueryString("tag"),next);
   }
   function jiazai(key,page){
     if(page<1||page>max){
+
       layer.msg("没有更多辣");
       return ;
     }
