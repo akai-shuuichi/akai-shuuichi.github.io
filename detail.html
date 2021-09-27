@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 </head>
 <body>
-<div class="layui-row" style="height: 50px ;background: #df4338">
+<div class="layui-row" style="width:100%;height: 50px ;background: #df4338">
     <div class="layui-col-xs2 ">
         <button onclick="goBack()" class="layui-col-md1 layui-icon layui-icon-left" style="color: white; border-right:2px solid #ffffff;; height:50px ;background: #df4338;font-size:xxx-large"></button>
     </div>
@@ -27,7 +27,7 @@
 
 <script id="demo" type="text/html">
     {{#layui.each(d.data, function(index, item){ }}
-    <img src="pic/loading.gif" lay-src="{{item.pic}}" loading="lazy" onload="this.src=this.getAttribute('lay-src')" style="width:97%;height:auto">
+    <img src="pic/loading.gif" lay-src="{{item.pic}}" loading="lazy" onload="this.src=this.getAttribute('lay-src')" style="width:100%;height:auto">
     {{#}); }}
 </script>
 </body>
