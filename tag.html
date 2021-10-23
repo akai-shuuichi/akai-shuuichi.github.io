@@ -181,10 +181,14 @@
       flow.lazyimg();
     });
   }
+  function tiaozhuan(key,page){
+
+    location.href='index.html?searchkey='+key+"&page="+page
+  }
 
   function nextpage(offset){
     var next=Number(dqpage)+offset;
-    jiazai(getQueryString("tag"),next);
+    tiaozhuan(getQueryString("tag"),next);
   }
   function jiazai(key,page){
     if(page<1||page>max){
@@ -204,8 +208,8 @@
     });
   }
   function skip(offset){
-    if(offset===0)jiazai(getQueryString("tag"),1)
-    else jiazai(getQueryString("tag"),max)
+    if(offset===0)tiaozhuan(getQueryString("tag"),1)
+    else tiaozhuan(getQueryString("tag"),max)
   }
   function search(){
     top.location="index.html?searchkey="+document.getElementById("searchkey").value+"&page=1"

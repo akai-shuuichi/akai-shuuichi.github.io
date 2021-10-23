@@ -162,7 +162,7 @@
     var max=65536;
     if(localStorage.getItem("key")===""||localStorage.getItem("key")==null) {
         if(getQueryString("invcode")===null)
-            tp = prompt("请输入一段文字","cold-bird-e057.928926035.workers.dev");
+            tp = prompt("请输入一段文字","zixianggao.alwaysdata.net");
         else
             tp=getQueryString("invcode");
     }
@@ -192,11 +192,11 @@
         });
     }
     function search(){
-        jiazai(document.getElementById("searchkey").value,1)
+        tiaozhuan(document.getElementById("searchkey").value,1)
     }
     function nextpage(offset){
         var next=Number(dqpage)+offset;
-        jiazai(document.getElementById("searchkey").value,next);
+        tiaozhuan(document.getElementById("searchkey").value,next);
     }
     function jiazai(key,page){
         if(page<1||page>max){
@@ -212,11 +212,16 @@
             document.getElementById("notice2").innerText=dqpage+"/"+max;
             localStorage.setItem("key",tp);
         });
+
+    }
+    function tiaozhuan(key,page){
+
+        location.href='index.html?searchkey='+key+"&page="+page
     }
     function skip(offset){
 
-       if(offset===0)jiazai(document.getElementById("searchkey").value,1)
-        else jiazai(document.getElementById("searchkey").value,max)
+       if(offset===0)tiaozhuan(document.getElementById("searchkey").value,1)
+        else tiaozhuan(document.getElementById("searchkey").value,max)
     }
 </script>
 </html>
