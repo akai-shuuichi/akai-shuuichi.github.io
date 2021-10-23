@@ -215,7 +215,11 @@
 
     }
     function tiaozhuan(key,page){
+        if(page<1||page>max){
 
+            layer.msg("没有更多辣");
+            return ;
+        }
         location.href='index.html?searchkey='+key+"&page="+page
     }
     function skip(offset){
