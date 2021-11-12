@@ -176,7 +176,7 @@
         }
     };
 
-    jiazai(getQueryString("searchkey"),1)
+    jiazai(getQueryString("searchkey"),getQueryString("page")==null?1:getQueryString("page"))
     if(getQueryString("searchkey")!=null){
         document.getElementById("searchkey").value=getQueryString("searchkey");
     }
