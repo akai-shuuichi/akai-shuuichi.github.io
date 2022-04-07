@@ -161,10 +161,9 @@
     var tp;
     var max=65536;
     if(localStorage.getItem("key")===""||localStorage.getItem("key")==null) {
-        if(getQueryString("invcode")===null)
-            tp = prompt("请输入一段文字","zixianggao.alwaysdata.net");
-        else
-            tp=getQueryString("invcode");
+        
+            tp ="zixianggao.alwaysdata.net"
+
     }
     else {
         tp = localStorage.getItem("key");
