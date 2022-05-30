@@ -79,7 +79,7 @@
 
 
     $.post("//"+tp+"/api/getpic",{bookid:getQueryString("bookid"),title:getQueryString("title")},function(result){
-        xuanran(result)
+        xuanran(result.data)
         localStorage.setItem("key",tp);
     });
 </script>
