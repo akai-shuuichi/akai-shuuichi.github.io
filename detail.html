@@ -27,7 +27,7 @@
 
 <script id="demo" type="text/html">
     {{#layui.each(d.data, function(index, item){ }}
-    <img src="pic/loading.gif" data-src="{{item.pic}}" style="width:100%;height:auto">
+    <img src="pic/loading.gif" data-src="{{item}}" style="width:100%;height:auto">
     {{#}); }}
 </script>
 </body>
@@ -79,7 +79,7 @@
 
 
     $.post("//"+tp+"/api/getpic",{bookid:getQueryString("bookid"),title:getQueryString("title")},function(result){
-        xuanran(result.data)
+        xuanran(result)
         localStorage.setItem("key",tp);
     });
 </script>
