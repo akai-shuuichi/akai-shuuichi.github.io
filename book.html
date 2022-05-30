@@ -58,7 +58,7 @@
 
 <script id="demo" type="text/html">
   {{#  layui.each(d.data, function(index, item){ }}
-  <button onclick=do1({{index+1}}) class="layui-btn "  style="width: 24%;margin-left: auto;margin-right: auto ">{{item.title}}</button>
+  <button onclick=do1({{item.title}}) class="layui-btn "  style="width: 24%;margin-left: auto;margin-right: auto ">{{item.title}}</button>
   {{#  }); }}
 </script>
 <script id="demo1" type="text/html">
@@ -92,7 +92,7 @@
     });
   }
   function do1(index){
-    top.location="detail.html?bookid="+getQueryString("id")+"&eps="+index;
+    top.location="detail.html?bookid="+getQueryString("id")+"&title="+index;
   }
 
 </script>
