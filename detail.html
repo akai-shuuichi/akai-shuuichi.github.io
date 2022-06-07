@@ -78,7 +78,7 @@
     }
 
 
-    $.post("//"+tp+"/api/getpic",{bookid:getQueryString("bookid"),title:getQueryString("title")},function(result){
+    $.post("//"+tp+"/api/getpic",{epsid:getQueryString("epsid")},function(result){
         xuanran(result)
         localStorage.setItem("key",tp);
     });
