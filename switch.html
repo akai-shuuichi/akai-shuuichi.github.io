@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script src="js/utils.js?ssss"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        .list {
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 0px;
+        }
+        .cl {
+            zoom: 1;
+        }
+        ul {
+            display:table-row  ;
+            list-style-type: disc;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 30px;
+        }
+        .list li {
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            color: #ccc;
+            margin: 0;
+            list-style: none;
+            list-style-type: none;
+            width: 25%;
+            float: left;
+            padding: 10px 0 0 10px;
+            -webkit-box-sizing: border-box;
+        }
+        .list li img {
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            list-style: none;
+            list-style-type: none;
+            color: #ccc;
+            aspect-ratio: auto 205 / 277;
+            border: 0;
+            width: 100%;
+            height: auto;
+            vertical-align: top;
+            display:table-row  ;
+            border-radius: 8px;
+
+        }
+        ul ul {
+            list-style-type: circle;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+
+        div {
+            display: block;
+        }
+
+        .txtbts{
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            list-style: none;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            width: 80%;
+            height: 37px;
+            line-height: 12px;
+            font-size: 12px;
+            color: #333;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: clip;
+            background: #fff;
+            text-align: center;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            color: #ccc;
+            height: 100%!important;
+        }
+        .ft{
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            color: #ccc;
+            margin: 0;
+            padding: 0;
+            zoom: 1;
+            width: 100%;
+            position: relative;
+            margin-top: 10px;
+            margin-left: 1%;
+        }
+        .bd{
+            font: 12px/1.5 "Microsoft Yahei","Helvetica Neue";
+            color: #ccc;
+            margin: 0;
+            position: relative;
+            padding: 0 6px;
+            margin-left: -1px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="layui-row" style="height: 50px ;background: #dcc865">
+    <div id="nowserver" class="layui-col-xs10" style="text-align: center;font-size: 30px;color: #333333" >
+        当前服务器:默认
+    </div>
+</div>
+<div id="server1" class="layui-row" style="height: 40px ;background: #65a8dc" onclick="swi(0)">
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #333333" >
+        节点1
+    </div>
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #ce5252 ; " >
+        测试ing
+    </div>
+</div>
+<div id="server2" class="layui-row" style="height: 40px ;background: #3f25b1" onclick="swi(1)">
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #333333" >
+        节点2
+    </div>
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #ce5252 ; " >
+        测试ing
+    </div>
+</div>
+<div id="server3" class="layui-row" style="height: 40px ;background: #258d89" onclick="swi(2)">
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #333333" >
+        节点3
+    </div>
+    <div  class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #ce5252 ; " >
+        测试ing
+    </div>
+</div>
+
+
+</body>
+<script>
+    var serverlist=[
+        "bikletmeseesee-production.up.railway.app",
+        "bikaletmesese.herokuapp.com",
+        "bika-akai-shuuichi.koyeb.app"
+    ];
+    var servername=[
+        "节点1",
+        "节点2",
+        "节点3",
+    ]
+    init();
+    function init(){
+        let demo=localStorage.getItem("key");
+        let index=0;
+        for(let i=0;i<serverlist.length;i++){
+            if(serverlist[i]==demo){
+                index=i;
+            }
+            $.get("//"+serverlist[i],
+            function (){
+                document.getElementById("server"+(i+1)).getElementsByClassName("layui-col-xs5")[1].innerText="能用"
+            }).fail(function () {
+                document.getElementById("server"+(i+1)).getElementsByClassName("layui-col-xs5")[1].innerText="不能用"
+            });
+        }
+        document.getElementById("nowserver").innerText="当前服务器:"+servername[index];
+    }
+    function swi(index){
+        localStorage.setItem("key",serverlist[index]);
+        layer.msg("已切换至"+servername[index]);
+        setTimeout(function () {
+            location.href='index.html';
+        },500)
+    }
+</script>
+</html>
