@@ -61,13 +61,12 @@
     lazyload();
     window.onscroll = lazyload;
     function lazyload() {
-        console.log("1")
         // 可见区域高度
         let seeHeight = document.documentElement.clientHeight;
         // 滚动条距离顶部高度
         let scrollTop = document.documentElement.scrollTop ;
         for (let i = n; i < num; i++) {
-            if (img[i].offsetTop < seeHeight + scrollTop+640) {
+            if (img[i].offsetTop < seeHeight + scrollTop+320) {
 
                 if (img[i].getAttribute("src") === "pic/loading.gif") {
                     img[i].src = img[i].getAttribute("data-src");
