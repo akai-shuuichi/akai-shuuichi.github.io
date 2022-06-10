@@ -79,7 +79,7 @@
 
     $.post("//"+tp+"/api/getpic",{epsid:getQueryString("epsid")},function(result){
         xuanran(result)
-        lazyload();
+        setTimeout(lazyload,500)
         localStorage.setItem("key",tp);
     });
 </script>
