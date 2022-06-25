@@ -141,7 +141,7 @@
 </div>
 <div id="server4" class="layui-row" style="height: 40px ;background: #258d89" onclick="swi(2)">
     <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #333333" >
-        节点3
+        节点4
     </div>
     <div  class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #ce5252 ; " >
         测试ing
@@ -175,8 +175,9 @@
     init();
     function init(){
         setTimeout(function (){
-            if(localStorage.getItem("use")==0){
+            if(localStorage.getItem("use")==0||localStorage.getItem("use")==null){
                 document.getElementsByClassName("layui-form-switch")[0].click()
+                localStorage.setItem("use",0)
             }
         },10)
         let demo=localStorage.getItem("key");
