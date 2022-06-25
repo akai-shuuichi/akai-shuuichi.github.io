@@ -139,22 +139,46 @@
         测试ing
     </div>
 </div>
+<div id="server4" class="layui-row" style="height: 40px ;background: #258d89" onclick="swi(2)">
+    <div class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #333333" >
+        节点3
+    </div>
+    <div  class="layui-col-xs5" style="text-align: center;font-size: 25px;color: #ce5252 ; " >
+        测试ing
+    </div>
+</div>
 
+<div class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">加速图片</label>
+        <div  id="use" class="layui-input-block" onclick="use(this)">
+            <input  type="checkbox"  name="zzz" lay-skin="switch" lay-text="开启|关闭">
+        </div>
+    </div>
+</div>
 
 </body>
 <script>
     var serverlist=[
         "bikletmeseesee-production.up.railway.app",
         "bikaletmesese.herokuapp.com",
-        "bika-akai-shuuichi.koyeb.app"
+        "bika-akai-shuuichi.koyeb.app",
     ];
-    var servername=[
-        "节点1",
-        "节点2",
-        "节点3",
-    ]
+    function use(data){
+        if(data.getElementsByClassName("layui-form-switch")[0].getElementsByTagName("em")[0].innerText=='开启'){
+            localStorage.setItem("use",0)
+        }else{
+            localStorage.setItem("use",1)
+        }
+    }
+
     init();
     function init(){
+        setTimeout(function (){
+            if(localStorage.getItem("use")==0){
+                document.getElementsByClassName("layui-form-switch")[0].click()
+            }
+        },10)
         let demo=localStorage.getItem("key");
         let index=0;
         for(let i=0;i<serverlist.length;i++){
@@ -168,7 +192,8 @@
                 document.getElementById("server"+(i+1)).getElementsByClassName("layui-col-xs5")[1].innerText="不能用"
             });
         }
-        document.getElementById("nowserver").innerText="当前服务器:"+servername[index];
+        document.getElementById("nowserver").innerText="当前服务器: 节点"+(index+1);
+
     }
     function swi(index){
         localStorage.setItem("key",serverlist[index]);

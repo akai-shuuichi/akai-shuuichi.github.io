@@ -202,7 +202,7 @@
             layer.msg("没有更多辣");
             return ;
         } loa= layer.load();
-        $.post("//"+tp+"/api/getindex",{searchkey:key,page:page},function(result){
+        $.post("//"+tp+"/api/getindex",{searchkey:key,page:page,use:localStorage.getItem("use")},function(result){
             layer.close(loa);
             xuanran(result)
             max=result.len;

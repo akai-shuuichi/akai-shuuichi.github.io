@@ -77,7 +77,7 @@
     }
 
 
-    $.post("//"+tp+"/api/getpic",{epsid:getQueryString("epsid")},function(result){
+    $.post("//"+tp+"/api/getpic",{epsid:getQueryString("epsid"),use:localStorage.getItem("use")},function(result){
         xuanran(result)
         setTimeout(lazyload,500)
         localStorage.setItem("key",tp);
